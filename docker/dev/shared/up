@@ -1,0 +1,3 @@
+#!/bin/bash
+
+docker-compose --env-file ./.env -f ./docker/dev/shared/docker-compose.yml -p lv_shared up -d 

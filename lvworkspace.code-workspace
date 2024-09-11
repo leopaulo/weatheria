@@ -1,0 +1,34 @@
+{
+    "folders": [
+        {
+            "path": ".",
+        },
+    ],
+    "settings": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true,
+        "eslint.alwaysShowStatus": true,
+        "files.exclude": {
+            "node_modules/": false,
+            "vendor/": false,
+        },
+        "editor.rulers": [120],
+        "editor.wordWrap": "wordWrapColumn",
+        "editor.wordWrapColumn": 120,
+        "files.watcherExclude": {
+            "**/.git/objects/**": true,
+            "**/node_modules/**": true,
+            "**/.svn/**": true,
+        },
+        "vetur.validation.template": false,
+        "editor.codeActionsOnSave": {
+            "source.fixAll.eslint": true,
+        },
+        "[vue]": {
+            "editor.defaultFormatter": "esbenp.prettier-vscode",
+        },
+        "[javascript]": {
+            "editor.defaultFormatter": "esbenp.prettier-vscode",
+        },
+    },
+}
