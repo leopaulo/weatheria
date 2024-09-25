@@ -1,6 +1,6 @@
 version: "3"
 services:
-    lv:
+    app:
         image: lv_dev
         hostname: ${APP_HOSTNAME:-lv}
         build:
@@ -17,23 +17,20 @@ services:
         volumes:
             - ./:/var/www/html
             - ${NPM_CACHE:-/var/www/html/npm/cache}:/root/.npm
-        networks:
-            - sail
 
-    mailhog:
-        image: "mailhog/mailhog:latest"
-        hostname: ${FORWARD_MAILHOG_HOSTNAME:-mailhog}
+    redis:
+        image: 'redis:alpine'
         ports:
-            - "${FORWARD_MAILHOG_PORT:-1025}:1025"
-            - "${FORWARD_MAILHOG_DASHBOARD_PORT:-8025}:8025"
+        - '${FORWARD_REDIS_PORT:-6379}:6379'
+        volumes:
+        - 'lvredis:/data'
         networks:
-            - sail
-
-networks:
-    sail:
-        external: true
-        name: lv_network
+        - sail
+        healthcheck:
+            test: ['CMD', 'redis-cli', 'ping']
 
 volumes:
-    sailmeilisearch:
-        driver: local
+  lvmysql:
+    driver: local
+  lvredis:
+    driver: local

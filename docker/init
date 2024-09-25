@@ -23,22 +23,4 @@ if [[ ! -d "./vendor" ]]; then
     echo -e "\033[1;35m Composer package installed! \033[0m"
 fi
 
-SHARED_NETWORK=lv_network
-if [[ "$(docker network ls | grep "${SHARED_NETWORK}")" == "" ]] ; then
-    docker network create "${SHARED_NETWORK}"
-    echo -e "\033[1;35m ${SHARED_NETWORK} network created! \033[0m"
-else 
-    echo -e "\033[1;35m ${SHARED_NETWORK} shared network already exists, project will use it instead! \033[0m"
-fi
-
-# Run shared docker services across all branches
-bash ./docker/dev/shared/up
-echo -e "\033[1;35m Shared Docker services created! \033[0m"
-
-# Login to your docker registry
-if ! grep -q "https://index.docker.io/v1/" ~/.docker/config.json ; then
-    echo -e "\033[1;35m Login to docker registry \033[0m"
-    docker login
-fi
-
 echo -e "\033[1;35m Done! You can customize the .env file & start running docker and sail commands now. \033[0m"
