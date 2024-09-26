@@ -1,4 +1,6 @@
 *
 !public/
 !private/
+!private/reference/
+!private/reference/*
 !.gitignore
