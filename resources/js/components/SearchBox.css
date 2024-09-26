@@ -2,6 +2,11 @@
     @apply absolute px-5 pr-16 w-full text-gray-800;
     bottom: -130px;
     height: 150px;
+    display: none;
+
+    &:hover {
+        display: block;
+    }
 }
 
 .search-icon {
@@ -12,4 +17,10 @@
 .search-input {
     @apply rounded-full shadow py-2 w-full pl-5;
     padding-right: 37px;
+
+    &:focus {
+        ~ .search-result {
+            display: block;
+        }
+    }
 }
