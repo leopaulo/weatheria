@@ -62,3 +62,8 @@ This application adheres to industry best practices for code quality and maintai
 ---
 
 # Screenshots
+
+![alt text](https://github.com/leopaulo/weatheria/blob/main/public/sample/homepage_desktop.png?raw=true)
+![alt text](https://github.com/leopaulo/weatheria/blob/main/public/sample/homepage_mobile.png?raw=true)
+![alt text](https://github.com/leopaulo/weatheria/blob/main/public/sample/search_desktop.png?raw=true)
+![alt text](https://github.com/leopaulo/weatheria/blob/main/public/sample/search_mobile.png?raw=true)
