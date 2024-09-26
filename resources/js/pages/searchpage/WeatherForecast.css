@@ -1,0 +1,15 @@
+@tailwind components;
+
+.weatherImage {
+    display: block;
+}
+
+@layer components {
+    .weatherImageContainer {
+        margin: -62px -42px;
+    }
+
+    .weatherImageSmall {
+        margin: -62px -28px;
+    }
+}

@@ -8,7 +8,7 @@ FROM webdevops/php-nginx:8.2-alpine as base
 WORKDIR /var/www/html
 
 #define nginx config with root folder
-ENV TZ=Asia/Manila PHP_DATE_TIMEZONE=Asia/Manila WEB_DOCUMENT_ROOT=/var/www/html/public FPM_REQUEST_TERMINATE_TIMEOUT=300
+ENV TZ=Asia/Tokyo PHP_DATE_TIMEZONE=Asia/Tokyo APP_TIMEZONE=Asia/Tokyo WEB_DOCUMENT_ROOT=/var/www/html/public FPM_REQUEST_TERMINATE_TIMEOUT=300 
 
 #define build time ARGS and Environments
 ARG ASSET_MANIFEST=assetsmanifest.json
@@ -75,7 +75,7 @@ RUN npm config set fetch-retry-mintimeout 100000 && \
 FROM setup as test
 
 # Copy necessary files for unit testing frontend
-COPY ./resources/frontend ./resources/frontend
+COPY ./resources/js ./resources/js
 # Frontend unit test
 # RUN npm run test
 
@@ -108,8 +108,7 @@ ENV NODE_ENV=production
 
 # Copy and create necessary files for frontend building
 COPY package*.json *.config.js ./
-COPY ./resources/frontend ./resources/frontend
-COPY ./nodescripts ./nodescripts
+COPY ./resources ./resources
 # Build frontend
 RUN npm run build
 
@@ -137,7 +136,6 @@ ENV APP_ENV=production
 
 # Copy needed files from build
 COPY --from=build "/var/www/html/public${ASSET_PATH}" "./public${ASSET_PATH}"
-COPY --from=build /var/www/html/assetsmanifest.json assetsmanifest.json
 COPY --from=build /var/www/html/vendor ./vendor
 
 # Copy whole project files, except the one in .dockerignore
@@ -155,8 +153,8 @@ COPY ./docker/start-production.sh /scripts/start-production.sh
 RUN chmod +x /scripts/start-production.sh
 
 # Cleanup
-RUN rm -rf ./resources/frontend \
-	&& rm -rf ./resources/frontend ./docker
+RUN rm -rf ./resources/js \
+	&& rm -rf ./resources/css ./docker
 
 # Start Application
 ENTRYPOINT ["/scripts/start-production.sh"]

@@ -1,0 +1,13 @@
+@tailwind components;
+
+@layer components {
+    .item {
+        @apply flex p-3;
+        width: 14.2857142857%;
+    }
+
+    .small-item {
+        @apply flex p-2;
+        width: 25%;
+    }
+}

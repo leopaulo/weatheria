@@ -1,0 +1,8 @@
+.logo {
+    @apply text-white text-center font-semibold text-lg flex;
+    margin-left: -20px;
+}
+
+.suggestion {
+    @apply w-full max-w-md px-10;
+}
