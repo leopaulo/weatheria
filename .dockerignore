@@ -6,7 +6,6 @@ assetsmanifest.json
 .svn
 bootstrap/cache/**/*
 storage/app/public/*
-storage/app/private/*
 storage/clockwork/**/*
 storage/framework/cache/*
 storage/framework/sessions/*
@@ -26,3 +25,4 @@ Dockerfile
 .dockerignore
 *.apk
 *.sig
+public/hot

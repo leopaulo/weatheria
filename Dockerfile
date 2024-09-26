@@ -11,12 +11,7 @@ WORKDIR /var/www/html
 ENV TZ=Asia/Tokyo PHP_DATE_TIMEZONE=Asia/Tokyo APP_TIMEZONE=Asia/Tokyo WEB_DOCUMENT_ROOT=/var/www/html/public FPM_REQUEST_TERMINATE_TIMEOUT=300 
 
 #define build time ARGS and Environments
-ARG ASSET_MANIFEST=assetsmanifest.json
-ENV ASSET_MANIFEST=${ASSET_MANIFEST}
-ARG ASSET_IS_VERSIONED=true
-ENV ASSET_IS_VERSIONED=${ASSET_IS_VERSIONED}
-ARG ASSET_PATH=/lv
-ENV ASSET_PATH=${ASSET_PATH}
+ARG VITE_BUILD_DIST=assetsmanifest.json
 ENV APP_VERSION=0.1.0
 
 #----------------
@@ -135,7 +130,7 @@ FROM base as production
 ENV APP_ENV=production
 
 # Copy needed files from build
-COPY --from=build "/var/www/html/public${ASSET_PATH}" "./public${ASSET_PATH}"
+COPY --from=build "/var/www/html/public" "./public"
 COPY --from=build /var/www/html/vendor ./vendor
 
 # Copy whole project files, except the one in .dockerignore
@@ -144,7 +139,7 @@ RUN chown -R application:application /var/www/html
 
 # Laravel Cache
 RUN php artisan route:clear && php artisan view:clear \
-    && php artisan route:cache && php artisan view:cache && php artisan key:generate
+    && php artisan route:cache && php artisan view:cache && touch .env && php artisan key:generate
 
 EXPOSE 80
 

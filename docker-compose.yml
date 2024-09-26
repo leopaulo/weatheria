@@ -1,7 +1,7 @@
 version: "3"
 services:
     app:
-        image: lv_dev
+        image: ${APP_IMAGE_NAME:-lv_build}
         hostname: ${APP_HOSTNAME:-lv}
         build:
             context: .
@@ -14,6 +14,8 @@ services:
         environment:
             WWWUSER: "${WWWUSER}"
             LARAVEL_SAIL: 1
+        env_file:
+            - .env
         volumes:
             - ./:${APP_ARTIFACT:-/var/www/html}
             - ${NPM_CACHE:-/var/www/html/npm/cache}:/root/.npm
